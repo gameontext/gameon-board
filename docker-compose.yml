@@ -1,0 +1,7 @@
+gameonboard:
+ build: board-wlpcfg 
+ env_file: gameon.${DOCKER_MACHINE_NAME}env
+ external_links:
+  - kafka
+ ports:
+  - "7090:7090"

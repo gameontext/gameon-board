@@ -20,7 +20,7 @@
     <applicationManager autoExpand="true"/>
 
     <!-- Where to find kafka/messagehub -->
-    <jndiEntry jndiName="kafkaUrl" value="${env.KAFKA_URL}"/>
+    <jndiEntry jndiName="kafkaUrl" value="${env.KAFKA_SERVICE_URL}"/>
 
     <!-- the messagehub/kafkaclient config is only used if you point kafkaviewer
          at messagehub, but it's harmless to leave it as part of the config
@@ -36,7 +36,7 @@
     <!-- because appSecurity-2.0 (required by the messagehub stuff, needs a keystore -->
     <keyStore id="defaultKeyStore" password="wibble"/>
 
-    <webApplication id="KafkaViewer" location="kafkaviewer-app.war" name="KafkaViewer"/>
+    <webApplication id="Board" location="board-app.war" name="Board"/>
 
       <logging consoleLogLevel="INFO" traceSpecification="*=info:org.gameontext.board.*=all"/>
 </server>

@@ -40,9 +40,9 @@ if (null != System.getenv("SSL_CERT"))
 def etcdEnvironment = ["LICENSE=accept", "ETCDCTL_ENDPOINT=http://etcd:4001"]
 
 task copyWAR(type: Copy) {
-    from '../kafkaviewer-app/build/libs/kafkaviewer-app-1.0.war'
-    into 'servers/kafkaviewer/apps/'
-    rename("kafkaviewer-app-1.0.war", "kafkaviewer-app.war")
+    from '../board-app/build/libs/board-app-1.0.war'
+    into 'servers/board/apps/'
+    rename("board-app-1.0.war", "board-app.war")
 }
 
 task build(dependsOn: ['copyWAR']){
