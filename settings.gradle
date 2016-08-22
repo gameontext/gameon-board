@@ -1,0 +1,4 @@
+include 'board-app'
+include 'board-wlpcfg'
+
+rootProject.name='board'
