@@ -13,37 +13,26 @@
  * See the License for the specific language governing permissions and
  * limitations under the License.
  *******************************************************************************/
-package org.gameontext.board;
+package org.gameontext.board.models.devices;
 
-public class GameOnEvent {
-	private long offset;
-	private String topic;
-	private String key;
-	private String value;
+import org.gameontext.board.models.map.Site;
 
-	public GameOnEvent(){
-	}
-
-	public GameOnEvent(long offset, String topic, String key, String value){
-		this.offset = offset;
-		this.topic = topic;
-		this.key=key;
-		this.value=value;
-	}
-	public long getOffset(){
-		return offset;
-	}
-	public String getTopic(){
-		return topic;
-	}
-	public String getKey(){
-		return key;
-	}
-	public String getValue(){
-		return value;
-	}
-
-	public String toString(){
-		return "GameOnEvent["+this.hashCode()+"] offset:"+offset+" topic:"+topic+" key:"+key+" value:"+value;
-	}
+//value for a gameon event
+public class Value {
+    private String type;
+    private Site site;
+    
+    public String getType() {
+        return type;
+    }
+    public void setType(String type) {
+        this.type = type;
+    }
+    public Site getSite() {
+        return site;
+    }
+    public void setSite(Site site) {
+        this.site = site;
+    }
+    
 }
