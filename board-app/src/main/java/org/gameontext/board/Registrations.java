@@ -24,6 +24,7 @@ import javax.annotation.PreDestroy;
 import javax.enterprise.context.ApplicationScoped;
 import javax.inject.Inject;
 
+import org.gameontext.board.clients.IoTBoardClient;
 import org.gameontext.board.kafka.GameOnEvent;
 import org.gameontext.board.kafka.KafkaRxJavaObservable;
 import org.gameontext.board.models.devices.Registration;
@@ -43,6 +44,9 @@ public class Registrations {
     @Inject
     KafkaRxJavaObservable kafka;
     
+    @Inject
+    IoTBoardClient iotboard;
+    
     private final ConcurrentMap<String, Registration> registrations = new ConcurrentHashMap<>();
     private Subscription subscription = null;
     
@@ -60,6 +64,7 @@ public class Registrations {
                 case "CREATE":
                     System.out.println("Creating new registration");
                     addRegistration(value);
+                    iotboard.register(value.getSite().getOwner(), value.getSite().getId());
                     break;
                 case "DELETE":
                     System.out.println("Deleting registration");
@@ -91,7 +96,7 @@ public class Registrations {
     }
     
     //add a new site registration or update an existing one
-    private void addRegistration(Value value) {
+    private Registration addRegistration(Value value) {
         Registration reg = new Registration();
         String playerId = value.getSite().getOwner();
         reg.setPlayer(playerId);
@@ -100,6 +105,7 @@ public class Registrations {
             existing = reg;     //this was a new entry
         }
         existing.addSite(value.getSite().getId());
+        return existing;
     }
     
     @PostConstruct

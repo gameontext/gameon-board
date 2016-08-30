@@ -15,41 +15,38 @@
  *******************************************************************************/
 package org.gameontext.board.models.devices;
 
-public class Device {
-
-    private String id;
-
-    public String getId() {
-        return id;
+//top level element for controlling the board state
+public class BoardControl {
+    private String gameonId;
+    private String siteId;
+    private DeviceData data;
+    
+    public BoardControl(){}
+       
+    public BoardControl(String gameonId, String siteId) {
+        super();
+        this.gameonId = gameonId;
+        this.siteId = siteId;
     }
 
-    public void setId(String id) {
-        this.id = id;
+    public String getGameonId() {
+        return gameonId;
     }
-
-    @Override
-    public int hashCode() {
-        final int prime = 31;
-        int result = 1;
-        result = prime * result + ((id == null) ? 0 : id.hashCode());
-        return result;
+    public void setGameonId(String gameonId) {
+        this.gameonId = gameonId;
     }
-
-    @Override
-    public boolean equals(Object obj) {
-        if (this == obj)
-            return true;
-        if (obj == null)
-            return false;
-        if (getClass() != obj.getClass())
-            return false;
-        Device other = (Device) obj;
-        if (id == null) {
-            if (other.id != null)
-                return false;
-        } else if (!id.equals(other.id))
-            return false;
-        return true;
+    public String getSiteId() {
+        return siteId;
     }
+    public void setSiteId(String siteId) {
+        this.siteId = siteId;
+    }
+    public DeviceData getData() {
+        return data;
+    }
+    public void setData(DeviceData data) {
+        this.data = data;
+    }
+    
     
 }

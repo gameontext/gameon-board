@@ -13,7 +13,7 @@
  * See the License for the specific language governing permissions and
  * limitations under the License.
  *******************************************************************************/
-package org.gameontext.board.auth;
+package org.gameontext.board.clients;
 
 import java.io.FileInputStream;
 import java.io.IOException;
@@ -84,7 +84,7 @@ public class PlayerClient implements SignedRequestSecretProvider {
      * The player URL injected from JNDI via CDI.
      *
      * @see {@code playerUrl} in
-     *      {@code /map-wlpcfg/servers/gameon-map/server.xml}
+     *      {@code /board-wlpcfg/servers/board/server.xml}
      */
     @Resource(lookup = "playerUrl")
     String playerLocation;

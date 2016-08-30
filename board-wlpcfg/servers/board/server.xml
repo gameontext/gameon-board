@@ -20,8 +20,9 @@
     <!-- Automatically expand WAR files and EAR files -->
     <applicationManager autoExpand="true"/>
 
-    <!-- Where to find kafka/messagehub -->
+    <!-- Where to find services -->
     <jndiEntry jndiName="kafkaUrl" value="${env.KAFKA_SERVICE_URL}"/>
+    <jndiEntry jndiName="iotBoardUrl" value="${env.IOTBOARD_SERVICE_URL}"/>
 
     <!-- the messagehub/kafkaclient config is only used if you point kafkaviewer
          at messagehub, but it's harmless to leave it as part of the config
@@ -37,7 +38,9 @@
     <!-- because appSecurity-2.0 (required by the messagehub stuff, needs a keystore -->
     <keyStore id="defaultKeyStore" password="wibble"/>
 
+	<!-- This is required to prevent the web apps from being lazily loaded -->
+    <webContainer deferServletLoad="false"/>
     <webApplication id="board" location="board-app.war" name="board"/>
 
-      <logging consoleLogLevel="INFO" traceSpecification="*=info:org.gameontext.board.*=all"/>
+    <logging consoleLogLevel="INFO" traceSpecification="*=info:org.gameontext.board.*=all"/>
 </server>
