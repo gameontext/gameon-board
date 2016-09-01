@@ -32,7 +32,6 @@ import org.apache.http.impl.client.HttpClientBuilder;
 import org.gameontext.board.Log;
 import org.gameontext.board.models.devices.BoardControl;
 import org.gameontext.board.models.devices.DeviceData;
-import org.gameontext.board.models.devices.Registration;
 
 import com.fasterxml.jackson.databind.ObjectMapper;
 
@@ -68,9 +67,12 @@ public class IoTBoardClient {
      * @param registration room/site registration to process
      */
     public void register(String gameonId, String siteId) {
+        System.out.println("Sending data to : " + iotBoardLocation);
+        
         BoardControl control = new BoardControl(gameonId, siteId);
         DeviceData devdata = new DeviceData("reg", true);
         control.setData(devdata);
+        System.out.println("Data : " + control);
         
         try {
             HttpClient client = HttpClientBuilder.create().build();
@@ -95,14 +97,15 @@ public class IoTBoardClient {
 
 
         } catch (HttpResponseException hre) {
-            Log.log(Level.FINEST, this, "Error communicating with player service: {0} {1}", hre.getStatusCode(), hre.getMessage());
-            throw new WebApplicationException("Error communicating with Player service", Response.Status.INTERNAL_SERVER_ERROR);
+            Log.log(Level.FINEST, this, "Error communicating with IoT board service: {0} {1}", hre.getStatusCode(), hre.getMessage());
+            throw new WebApplicationException("Error communicating with IoT board service", Response.Status.INTERNAL_SERVER_ERROR);
         } catch (WebApplicationException wae) {
             Log.log(Level.FINEST, this, "Error processing response: {0}", wae.getResponse());
             throw wae;
         } catch ( IOException e ) {
-            Log.log(Level.FINEST, this, "Unexpected exception getting secret from playerService: {0}", e);
-            throw new WebApplicationException("Error communicating with Player service", Response.Status.INTERNAL_SERVER_ERROR);
+            Log.log(Level.FINEST, this, "Unexpected exception from IoT board: {0}", e);
+            e.printStackTrace();
+            throw new WebApplicationException("Error communicating with IoT board service", Response.Status.INTERNAL_SERVER_ERROR);
         }
     }
 }

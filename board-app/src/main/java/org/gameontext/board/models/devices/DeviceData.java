@@ -41,5 +41,10 @@ public class DeviceData {
         this.state = state;
     }
 
+    @Override
+    public String toString() {
+        return "DeviceData [light=" + light + ", state=" + state + "]";
+    }
+
     
 }

@@ -47,6 +47,11 @@ public class BoardControl {
     public void setData(DeviceData data) {
         this.data = data;
     }
+
+    @Override
+    public String toString() {
+        return "BoardControl [gameonId=" + gameonId + ", siteId=" + siteId + ", data=" + data + "]";
+    }
     
     
 }
