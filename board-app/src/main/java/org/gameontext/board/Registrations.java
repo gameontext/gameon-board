@@ -16,6 +16,7 @@
 package org.gameontext.board;
 
 import java.util.Collection;
+import java.util.Map.Entry;
 import java.util.concurrent.ConcurrentHashMap;
 import java.util.concurrent.ConcurrentMap;
 
@@ -64,11 +65,14 @@ public class Registrations {
                 case "CREATE":
                     System.out.println("Creating new registration");
                     addRegistration(value);
-                    iotboard.register(value.getSite().getOwner(), value.getSite().getId());
+                    iotboard.control(value.getSite().getOwner(), value.getSite().getId(), true);
                     break;
                 case "DELETE":
                     System.out.println("Deleting registration");
-                    deleteRegistration(value);
+                    String playerId = deleteRegistration(value);
+                    if(playerId != null) {
+                        iotboard.control(playerId, value.getSite().getId(), true);
+                    }
                     break; 
                 default:
                     System.out.println("WARN : unknown event type : " + value.getType());
@@ -80,19 +84,39 @@ public class Registrations {
     }
     
     //TODO make thread safe and lock access to the sites under this registration
-    private void deleteRegistration(Value value) {
+    private String deleteRegistration(Value value) {
         String playerId = value.getSite().getOwner();
         if(playerId == null) {
-            System.out.println("WARN : missing player ID for delete operation.");
-            return;
+            System.out.println("WARN : missing player ID for delete operation, searching by site.");
+            playerId = findPlayerBySite(value.getSite().getId());
+            if(playerId == null) {
+                System.out.println("WARN : Unable to find player ID using the site ID");
+            }
+            System.out.println("Deleting room registration for " + playerId);
         }
         Registration reg = registrations.get(playerId);
         if(reg != null) {
-            reg.getSites().remove(value.getSite());
+            reg.getSites().remove(value.getSite().getId());
             if(reg.getSites().isEmpty()) {
                 registrations.remove(playerId);
+                return playerId;
             }
         }
+        return null;
+    }
+    
+    private String findPlayerBySite(String siteId) {
+        if(siteId == null) {
+            return null;
+        }
+        for(Entry<String, Registration> entry : registrations.entrySet()) {
+            for(String site : entry.getValue().getSites()) {
+                if(site.equals(siteId)) {
+                    return entry.getKey();
+                }
+            }
+        }
+        return null;
     }
     
     //add a new site registration or update an existing one

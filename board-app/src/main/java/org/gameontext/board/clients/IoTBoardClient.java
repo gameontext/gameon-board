@@ -66,12 +66,12 @@ public class IoTBoardClient {
      * 
      * @param registration room/site registration to process
      */
-    public void register(String gameonId, String siteId) {
+    public void control(String gameonId, String siteId, boolean status) {
         String endpoint = iotBoardLocation + "/v1/control";
         System.out.println("Sending data to : " + endpoint);
         
         BoardControl control = new BoardControl(gameonId, siteId);
-        DeviceData devdata = new DeviceData("reg", true);
+        DeviceData devdata = new DeviceData("reg", status);
         control.setData(devdata);
         System.out.println("Data : " + control);
         
