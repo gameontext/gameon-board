@@ -20,6 +20,7 @@ public class BoardControl {
     private String gameonId;
     private String siteId;
     private DeviceData data;
+    private String roomName;
     
     public BoardControl(){}
        
@@ -50,8 +51,16 @@ public class BoardControl {
 
     @Override
     public String toString() {
-        return "BoardControl [gameonId=" + gameonId + ", siteId=" + siteId + ", data=" + data + "]";
+        return "BoardControl [gameonId=" + gameonId + ", siteId=" + siteId + ", data=" + data + ", roomName=" + roomName
+                + "]";
     }
-    
+
+    public String getRoomName() {
+        return roomName;
+    }
+
+    public void setRoomName(String roomName) {
+        this.roomName = roomName;
+    }
     
 }
