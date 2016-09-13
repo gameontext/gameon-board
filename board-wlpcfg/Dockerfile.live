@@ -11,7 +11,7 @@ ADD https://download.elastic.co/logstash-forwarder/binaries/logstash-forwarder_l
 
 RUN apt-get update; apt-get install -y curl
 
-ENV SERVERDIRNAME regsvc
+ENV SERVERDIRNAME board
 
 COPY ./forwarder.conf /opt/forwarder.conf
 COPY ./startup.sh /opt/startup.sh
