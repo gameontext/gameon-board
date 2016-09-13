@@ -12,7 +12,6 @@ ADD https://download.elastic.co/logstash-forwarder/binaries/logstash-forwarder_l
 RUN apt-get update; apt-get install -y curl
 
 ENV SERVERDIRNAME board
-ENV IOTBOARD_SERVICE_URL ${IOTBOARD_SERVICE_URL}
 
 COPY ./forwarder.conf /opt/forwarder.conf
 COPY ./startup.sh /opt/startup.sh

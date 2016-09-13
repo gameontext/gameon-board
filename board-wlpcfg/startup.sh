@@ -51,6 +51,7 @@ if [ "$ETCDCTL_ENDPOINT" != "" ]; then
   export MESSAGEHUB_PASSWORD=$(etcdctl get /passwords/kafka)
   export LOGSTASH_ENDPOINT=$(etcdctl get /logstash/endpoint)
   export MAP_KEY=$(etcdctl get /passwords/map-key)
+  export IOTBOARD_SERVICE_URL=$(etcdctl get /iotboard/url)
 
   #to run with message hub, we need a jaas jar we can only obtain
   #from github

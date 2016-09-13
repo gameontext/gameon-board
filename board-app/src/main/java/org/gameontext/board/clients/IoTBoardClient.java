@@ -67,7 +67,8 @@ public class IoTBoardClient {
      * @param registration room/site registration to process
      */
     public void register(String gameonId, String siteId) {
-        System.out.println("Sending data to : " + iotBoardLocation);
+        String endpoint = iotBoardLocation + "/v1/control";
+        System.out.println("Sending data to : " + endpoint);
         
         BoardControl control = new BoardControl(gameonId, siteId);
         DeviceData devdata = new DeviceData("reg", true);
@@ -77,7 +78,7 @@ public class IoTBoardClient {
         try {
             HttpClient client = HttpClientBuilder.create().build();
     
-            HttpPost hg = new HttpPost(iotBoardLocation);
+            HttpPost hg = new HttpPost(endpoint);
             
             ObjectMapper om = new ObjectMapper();
             String data = om.writeValueAsString(control);
