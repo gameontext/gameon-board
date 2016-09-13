@@ -47,9 +47,10 @@ if [ "$ETCDCTL_ENDPOINT" != "" ]; then
   keytool -v -importkeystore -srcalias 1 -alias 1 -destalias default -noprompt -srcstorepass keystore -deststorepass testOnlyKeystore -srckeypass keystore -destkeypass testOnlyKeystore -srckeystore cert.pkcs12 -srcstoretype PKCS12 -destkeystore security/key.jks -deststoretype JKS
 
   export KAFKA_URL=$(etcdctl get /kafka/url)
-  export KAFKA_USER=$(etcdctl get /kafka/user)
-  export KAFKA_PASSWORD=$(etcdctl get /passwords/kafka)
+  export MESSAGEHUB_USER=$(etcdctl get /kafka/user)
+  export MESSAGEHUB_PASSWORD=$(etcdctl get /passwords/kafka)
   export LOGSTASH_ENDPOINT=$(etcdctl get /logstash/endpoint)
+  export MAP_KEY=$(etcdctl get /passwords/map-key)
 
   #to run with message hub, we need a jaas jar we can only obtain
   #from github

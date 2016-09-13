@@ -23,6 +23,7 @@
     <!-- Where to find services -->
     <jndiEntry jndiName="kafkaUrl" value="${env.KAFKA_SERVICE_URL}"/>
     <jndiEntry jndiName="iotBoardUrl" value="${env.IOTBOARD_SERVICE_URL}"/>
+    <jndiEntry jndiName="mapApiKey" value="${env.MAP_KEY}"/>
 
     <!-- the messagehub/kafkaclient config is only used if you point kafkaviewer
          at messagehub, but it's harmless to leave it as part of the config
