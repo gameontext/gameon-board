@@ -31,7 +31,7 @@
        <fileset dir="${server.config.dir}" includes="messagehub.login-1.0.0.jar"/>
     </library>
     <jaasLoginModule className="com.ibm.messagehub.login.MessageHubLoginModule" controlFlag="REQUIRED" id="KafkaClient" libraryRef="messageHubLoginLib">
-       <options password="${env.KAFKA_PASSWORD}" serviceName="kafka" username="${env.KAFKA_USER}"/>
+       <options password="${env.MESSAGEHUB_PASSWORD}" serviceName="kafka" username="${env.MESSAGEHUB_USER}"/>
     </jaasLoginModule>
     <jaasLoginContextEntry id="KafkaClient" loginModuleRef="KafkaClient" name="KafkaClient"/>
 
