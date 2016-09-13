@@ -33,7 +33,7 @@ then
   curl -X 'POST' --silent --data-binary '{"text":"Build for the gameon board service has failed."}' $SLACK_WEBHOOK_PATH > /dev/null
   exit -1
 else
-  cd regsvc-wlpcfg
+  cd board-wlpcfg
   ../docker build -t gameon-board -f Dockerfile.live .
   if [ $? != 0 ]
   then
@@ -45,7 +45,7 @@ else
     ../docker stop -t 0 gameon-board || true
     ../docker rm gameon-board || true
     echo Starting new container.
-    ../docker run -d -p 9019:9080 -p 9143:9443 --restart=always --link etcd -e LICENSE=accept -e ETCDCTL_ENDPOINT=http://etcd:4001 --name=gameon-regsvc gameon-regsvc
+    ../docker run -d -p 9019:9080 -p 9143:9443 --restart=always --link etcd -e LICENSE=accept -e ETCDCTL_ENDPOINT=http://etcd:4001 --name=gameon-board gameon-board
     if [ $? != 0 ]
     then
       echo Docker Run failed.
