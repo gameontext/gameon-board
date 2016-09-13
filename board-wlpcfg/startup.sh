@@ -46,7 +46,7 @@ if [ "$ETCDCTL_ENDPOINT" != "" ]; then
   keytool -delete -storepass testOnlyKeystore -alias endeca -keystore security/key.jks
   keytool -v -importkeystore -srcalias 1 -alias 1 -destalias default -noprompt -srcstorepass keystore -deststorepass testOnlyKeystore -srckeypass keystore -destkeypass testOnlyKeystore -srckeystore cert.pkcs12 -srcstoretype PKCS12 -destkeystore security/key.jks -deststoretype JKS
 
-  export KAFKA_URL=$(etcdctl get /kafka/url)
+  export KAFKA_SERVICE_URL=$(etcdctl get /kafka/url)
   export MESSAGEHUB_USER=$(etcdctl get /kafka/user)
   export MESSAGEHUB_PASSWORD=$(etcdctl get /passwords/kafka)
   export LOGSTASH_ENDPOINT=$(etcdctl get /logstash/endpoint)
